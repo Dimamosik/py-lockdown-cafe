@@ -17,11 +17,18 @@ class Cafe:
                 f"{visitor.get('name', 'Visitor')} is not vaccinated"
             )
 
-        expiration_date = visitor["vaccine"].get("expiration_date")
+        vaccine = visitor["vaccine"]
+
+        if not isinstance(vaccine, dict):
+            raise OutdatedVaccineError(
+                f"{visitor.get('name', 'Visitor')}'s vaccine is invalid"
+            )
+
+        expiration_date = vaccine.get("expiration_date")
 
         if expiration_date is None:
             raise OutdatedVaccineError(
-                f"{visitor.get('name', 'Visitor')}'s vaccine has no expiration date"
+                f"{visitor.get('name', 'Visitor')}'s vaccine is outdated"
             )
 
         if expiration_date < datetime.date.today():
