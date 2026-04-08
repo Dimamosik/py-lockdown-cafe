@@ -1,4 +1,5 @@
 from typing import List, Dict, Any
+
 from app.cafe import Cafe
 from app.errors import VaccineError, NotWearingMaskError
 
